@@ -10,19 +10,39 @@
        }
 
        body {
-          background-image: url('http://farm2.static.flickr.com/1339/761415136_dfc1bd7f6f_o.jpg');
+          background-image: url('http://www.colourlovers.com/wallPaper/320x480/n/465753/COLOURlovers.com-Navaho.png');
+       }
+
+       #cover {
+          /*
+          background-image:  url('http://farm2.static.flickr.com/1339/761415136_dfc1bd7f6f_o.jpg');
           background-repeat: no-repeat;
+          */
+          width:   575px;
+          height:  575px;
+          padding: 15px;
        }
 
        ul {
+          background-color: #fff;
           position: absolute;
           left: 650px;
           top: 30px;
           list-style-type: none;
+          padding: 20px;
        }
 
        #repos {
-          top: 130px;
+          top: 150px;
+       }
+
+       #repos li {
+          margin-left: 15px;
+       }
+
+       #repos #header {
+          margin-left: 0;
+          padding-bottom: 8px;
        }
 
        a {
@@ -76,13 +96,15 @@
      <a href="http://github.com/icco/icco.github.com">
         <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
      </a>            
-    <ul>
-      <li><a href="http://pseudoweb.net/">Nat's Blog</a></li>
-      <li><a href="http://github.com/icco">Nat at GitHub</a></li>
-      <li><a href="mailto:nat@natwelch.com">nat</a>@<a href="http://natwelch.com">natwelch.com</a></li>
-    </ul>
-    <ul id="repos">
-      <li><h3>repositories</h3></li>
-    </ul>
+     <div id="cover">
+     </div>
+     <ul>
+        <li><a href="http://pseudoweb.net/">Nat's Blog</a></li>
+        <li><a href="http://github.com/icco">Nat at GitHub</a></li>
+        <li><a href="mailto:nat@natwelch.com">nat</a>@<a href="http://natwelch.com">natwelch.com</a></li>
+     </ul>
+     <ul id="repos">
+        <li id="header"><h3>repositories</h3></li>
+     </ul>
   </body>
 </html>
