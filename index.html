@@ -19,39 +19,41 @@
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-      $(function() {
-         var login = 'icco' // your username
+       $(document).ready(function() {
+         var login = 'icco';
 
          // The repos I want to list
          var myRepos = [
             'coffee_shop',
+            'CSC484',
+            'self-note',
+            'dotFiles',
             'icco.github.com',
             'pseudoweb',
             'natwelch.com',
-            'self-note',
-            'dotFiles',
             'crackquotes'
          ];
 
          $.getJSON('http://github.com/api/v1/json/' + login + '?callback=?', function(data) {
             var repos = $.grep(data.user.repositories, function() {
                return !this.fork
-            })
+            });
 
-            repos = repos.filter(function(x) {
-               // console.log(myRepos.indexOf(x.name));
-               return myRepos.indexOf(x.name) >= 0;
-            })
-
-            repos.sort(function(a, b) {
-               return b.watchers - a.watchers
-            })
+            repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
 
             $.each(repos, function() {
-               $('#repos').append('<li><a href="' + this.url + '">' + this.name + '</a><br /><small> - ' + this.description + '</small></li>')
-            })
-         })
-      })
+               hp = '<a href="' + this.homepage + '">#</a>';
+               desc = '<small> - ' + this.description + '</small>';
+
+               if (this.homepage)
+                  a = '<a href="' + this.url + '">' + this.name + '</a> ' + hp;
+               else
+                  a = '<a href="' + this.url + '">' + this.name + '</a>';
+
+               $('#repos').append('<li>' + a + '<br />' + desc + '</li>')
+            });
+         });
+      });
     </script>
   </head>
   <body>
