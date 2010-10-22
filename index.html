@@ -10,20 +10,19 @@
     <link rel="stylesheet" type="text/css" media="all" href="css/960.css" />
 
     <style type="text/css">
-       * { margin: 0; padding: 0; }
-       a { color: #333; font-family: Lucida Grande; line-height: 18px; }
+       a { color: #333; font-size: 1.2em; }
        body { 
           padding: 50px; 
           background-image: url('http://www.colourlovers.com/wallPaper/320x480/n/465753/COLOURlovers.com-Navaho.png'); 
+          font-family: serif;
        }
-       h3 { font-family: Lucida Grande; }
-       ul { background-color: #fff; list-style-type: none; padding: 20px; }
-       #info { background-color: #fff; padding: 20px; }
+       p, h1, h3 { margin: 0; }
+       #info1, #info2 { background-color: #fff; padding: 20px; }
+       #info1, #info2, #repos, #links { margin-bottom: 20px; background-color: #fff; padding: 20px; }
+       #links { font-size: 1.2em; }
        #repos #header { margin-left: 0; padding-bottom: 8px; }
-       #repos li { margin-left: 15px; }
-       #repos { }
-       #info, #repos, #links { }
-       #links { }
+       #repos li, #links li { margin-left: 15px; list-style-type: none; }
+       #repos ul, #links ul { margin: 0; }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -65,28 +64,41 @@
       });
     </script>
   </head>
-  <body>
-     <a href="http://github.com/icco/icco.github.com">
-        <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
-     </a>
-     <div id="info">
-        <h1>Nat Welch's Code</h1>
-        <p>
-        This is my GitHub page, which displays projects that I am either proud of or currently working on.
-        </p>
-     </div>
-     <ul id='links'>
-        <li><a href="http://github.com/icco">Nat on GitHub</a></li>
-        <li><a href="mailto:nat@natwelch.com">nat</a>@<a href="http://natwelch.com">natwelch.com</a></li>
-     </ul>
-     <ul id="repos">
-        <li id="header"><h3>repositories</h3></li>
-     </ul>
-     <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-333449-7']);
-        _gaq.push(['_trackPageview']);
-        (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga); })();
-        </script>
-  </body>
+   <body>
+      <!-- Github banner -->
+      <a href="http://github.com/icco/icco.github.com"> <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" /> </a>
+
+      <div class="container_12">
+         <div class="grid_5">
+            <div id="info1" >
+               <h1>Nat Welch&apos;s Code</h1>
+            </div>
+            <div id="info2" >
+               <p>
+               This is my GitHub page, which displays projects that I am either proud of or currently working on.
+               </p>
+            </div>
+            <div id="links">
+               <ul>
+                  <li><a href="http://github.com/icco">@icco</a> on GitHub</li>
+                  <li><a href="mailto:nat@natwelch.com">nat</a>@<a href="http://natwelch.com">natwelch.com</a></li>
+               </ul>
+            </div>
+         </div>
+         <div id="repos" class="grid_6">
+            <h2>Repositories</h2>
+            <ul>
+            </ul>
+         </div>
+      </div>
+      <div class="container_12">
+      </div>
+
+      <script type="text/javascript">
+         var _gaq = _gaq || [];
+         _gaq.push(['_setAccount', 'UA-333449-7']);
+         _gaq.push(['_trackPageview']);
+         (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga); })();
+      </script>
+   </body>
 </html>
