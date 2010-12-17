@@ -37,6 +37,7 @@
 
          // The repos I want to list
          var myRepos = [
+            'Javascript_Embed',
             'coffee_shop',
             'CSC484',
             'self-note',
@@ -46,7 +47,7 @@
             'pseudoweb',
             'Resume',
             'natwelch.com',
-            'crackquotes'
+            'crackquotes',
          ];
 
          $.getJSON('http://github.com/api/v1/json/' + login + '?callback=?', function(data) {
