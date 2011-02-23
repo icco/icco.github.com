@@ -12,18 +12,24 @@
     <style type="text/css">
        a, a:visited { color: #333; font-size: 1.2em; }
        a:hover { color: #999; }
-       body { 
-          padding: 50px; 
-          background-image: url('bwnavaho.png'); 
+       body {
+          padding: 50px;
+          background-image: url('bwnavaho.png');
           font-family: serif;
        }
+
+       ul.inline { list-style: none; }
+       ul.inline li { display: inline; margin: 5px; }
+       ul.inline li a { text-decoration: none; }
+
        p, h1, h2, h3 { margin: 0; }
        #info1, #info2 { background-color: #fff; padding: 20px; }
-       #info1, #info2, #repos, #links { 
-          margin-bottom: 20px; 
+
+       .box {
+          margin-bottom: 20px;
           background-color: #fff;
           padding: 20px;
-          border: 10px #333333 solid; 
+          border: 10px #333333 solid;
        }
        #links { font-size: 1.2em; }
        #repos #header { margin-left: 0; padding-bottom: 8px; }
@@ -35,7 +41,7 @@
        $(document).ready(function() {
          var login = 'icco';
 
-         // The repos I want to list
+         // The repos I want to feature
          var myRepos = [
             'CSC484',
             'Javascript_Embed',
@@ -46,7 +52,6 @@
             'dotFiles',
             'natwelch.com',
             'pseudoweb',
-            'self-note',
             'thestack',
          ];
 
@@ -55,50 +60,63 @@
                return !this.fork
             });
 
-            repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
+            other_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) < 0; });
+            featured_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
 
-            $.each(repos, function() {
+            // Detailed repositories
+            $.each(featured_repos, function() {
                hp = '<a href="' + this.homepage + '">#</a>';
                desc = '<small> - ' + this.description + '</small>';
+               a = '<a href="' + this.url + '">' + this.name + '</a> ';
+               a = this.homepage ? a + hp : a;
 
-               if (this.homepage)
-                  a = '<a href="' + this.url + '">' + this.name + '</a> ' + hp;
-               else
-                  a = '<a href="' + this.url + '">' + this.name + '</a>';
+               $('#repos > ul').append('<li>' + a + '<br />' + desc + '</li>')
+            });
 
-               $('#repos').append('<li>' + a + '<br />' + desc + '</li>')
+            // Everything else.
+            $.each(other_repos, function() {
+               a = '<a href="' + this.url + '">' + this.name + '</a> ';
+               $('#other_repos > ul').append('<li>' + a + '</li>')
             });
          });
       });
     </script>
-  </head>
+   </head>
    <body>
       <!-- Github banner -->
       <a href="http://github.com/icco/icco.github.com"> <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" /> </a>
 
       <div class="container_12">
          <div class="grid_5">
-            <div id="info1" >
+            <div id="info1" class="box">
                <h1>Nat Welch&apos;s Code</h1>
             </div>
-            <div id="info2" >
+            <div id="info2" class="box">
                <p>
                This is my GitHub page, which displays projects that I am either proud of or currently working on.
                </p>
             </div>
-            <div id="links">
+            <div id="links" class="box">
                <ul>
                   <li><a href="http://github.com/icco">@icco</a> on GitHub</li>
                   <li><a href="mailto:nat@natwelch.com">nat</a>@<a href="http://natwelch.com">natwelch.com</a></li>
                </ul>
             </div>
          </div>
-         <div id="repos" class="grid_6">
-            <h2>Repositories</h2>
-            <ul>
-            </ul>
+         <div class="grid_6">
+            <div id="repos" class="box">
+               <h2>Repositories</h2>
+               <ul>
+               </ul>
+            </div>
+            <div id="other_repos" class="box">
+               <h3>Other Repositories</h3>
+               <ul class="inline">
+               </ul>
+            </div>
          </div>
       </div>
+
       <div class="container_12">
       </div>
 
