@@ -60,6 +60,12 @@
                return !this.fork
             });
 
+            repos.sort(function(a, b) {
+               var compA = b.pushed_at;
+               var compB = a.pushed_at;
+               return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+            });
+
             other_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) < 0; });
             featured_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
 
