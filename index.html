@@ -14,7 +14,7 @@
        a:hover { color: #999; }
        body {
           padding: 50px;
-          background-image: url('i/flowers.png');
+          background-image: url('i/squares-2.png');
           font-family: serif;
        }
 
@@ -41,52 +41,64 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
        $(document).ready(function() {
-         var login = 'icco';
+          // Randomize bg.
+          var bgs = [
+             'i/bwnavaho.png',
+             'i/flowers.png',
+             'i/squares-2.png',
+             'i/squares.png'
+          ];
 
-         // The repos I want to feature
-         var myRepos = [
-            'CSC484',
-            'Javascript_Embed',
-            'RainbowDeathSwarm',
-            'Resume',
-            'coffee_shop',
-            'crackquotes',
-            'dotFiles',
-            'pseudoweb',
-            'thestack',
-         ];
+          var bgimg = bgs[Math.floor(Math.random()*bgs.length)];
+          $('body').css({'backgroundImage': "url('" + bgimg + "')"});
 
-         $.getJSON('http://github.com/api/v1/json/' + login + '?callback=?', function(data) {
-            var repos = $.grep(data.user.repositories, function() {
-               return !this.fork
-            });
+          // Get GitHub Repositories
+          var login = 'icco';
+          $.getJSON('http://github.com/api/v1/json/' + login + '?callback=?', function(data) {
 
-            repos.sort(function(a, b) {
-               var compA = b.pushed_at;
-               var compB = a.pushed_at;
-               return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-            });
+             // The repos I want to feature
+             var myRepos = [
+                'CSC484',
+                'Javascript_Embed',
+                'RainbowDeathSwarm',
+                'Resume',
+                'coffee_shop',
+                'crackquotes',
+                'dotFiles',
+                'pseudoweb',
+                'thestack'
+             ];
 
-            other_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) < 0; });
-            featured_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
+             var repos = $.grep(data.user.repositories, function() {
+                return !this.fork
+             });
 
-            // Detailed repositories
-            $.each(featured_repos, function() {
-               hp = '<a href="' + this.homepage + '">#</a>';
-               desc = '<small> - ' + this.description + '</small>';
-               a = '<a href="' + this.url + '">' + this.name + '</a> ';
-               a = this.homepage ? a + hp : a;
+             repos.sort(function(a, b) {
+                var compA = b.pushed_at;
+                var compB = a.pushed_at;
+                return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+             });
 
-               $('#repos > ul').append('<li>' + a + '<br />' + desc + '</li>')
-            });
+             other_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) < 0; });
+             featured_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
 
-            // Everything else.
-            $.each(other_repos, function() {
-               a = '<a href="' + this.url + '">' + this.name + '</a> ';
-               $('#other_repos > ul').append('<li>' + a + '</li>')
-            });
-         });
-      });
+             // Detailed repositories
+             $.each(featured_repos, function() {
+                hp = '<a href="' + this.homepage + '">#</a>';
+                desc = '<small> - ' + this.description + '</small>';
+                a = '<a href="' + this.url + '">' + this.name + '</a> ';
+                a = this.homepage ? a + hp : a;
+
+                $('#repos > ul').append('<li>' + a + '<br />' + desc + '</li>')
+             });
+
+             // Everything else.
+             $.each(other_repos, function() {
+                a = '<a href="' + this.url + '">' + this.name + '</a> ';
+                $('#other_repos > ul').append('<li>' + a + '</li>')
+             });
+          });
+       });
     </script>
    </head>
    <body>
