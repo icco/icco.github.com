@@ -71,21 +71,26 @@
                 'thestack',
              ];
 
-             var repos = $.grep(data.user.repositories, function() {
+             var repos = $.grep(data.user.repositories, function () {
                 return !this.fork
              });
 
-             repos.sort(function(a, b) {
+             // Remove private repos
+             repos = repos.filter(function (x) { return !x.private; });
+
+             // Sort by push date
+             repos.sort(function (a, b) {
                 var compA = b.pushed_at;
                 var compB = a.pushed_at;
                 return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
              });
 
-             other_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) < 0; });
-             featured_repos = repos.filter(function(x) { return myRepos.indexOf(x.name) >= 0; });
+             // Split into featured and other
+             other_repos = repos.filter(function (x) { return myRepos.indexOf(x.name) < 0 && !x.private; });
+             featured_repos = repos.filter(function (x) { return myRepos.indexOf(x.name) >= 0; });
 
              // Detailed repositories
-             $.each(featured_repos, function() {
+             $.each(featured_repos, function () {
                 hp = '<a href="' + this.homepage + '">#</a>';
                 desc = '<small> - ' + this.description + '</small>';
                 a = '<a href="' + this.url + '">' + this.name + '</a> ';
@@ -95,9 +100,9 @@
              });
 
              // Everything else.
-             $.each(other_repos, function() {
+             $.each(other_repos, function () {
                 a = '<a href="' + this.url + '">' + this.name + '</a> ';
-                $('#other_repos > ul').append('<li>' + a + '</li>')
+                $('#other_repos > ul').append('<li>' + a + '</li>');
              });
 
              $('#other_repos > h3').bind('click', function (ev) {
