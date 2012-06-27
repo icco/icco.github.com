@@ -54,8 +54,10 @@
           $('body').css({'backgroundImage': "url('" + bgimg + "')"});
 
           // Get GitHub Repositories
+          // TODO: if over 100 repos, add pagination.
           var login = 'icco';
-          $.getJSON('http://github.com/api/v1/json/' + login + '?callback=?', function(data) {
+          $.getJSON('https://api.github.com/users/' + login + '/repos?type=owner&per_page=100&sort=pushed&callback=?', function(data) {
+            var repos = data.data;
 
              // The repos I want to feature
              var myRepos = [
@@ -70,20 +72,6 @@
                 'pseudoweb',
                 'thestack',
              ];
-
-             var repos = $.grep(data.user.repositories, function () {
-                return !this.fork
-             });
-
-             // Remove private repos
-             repos = repos.filter(function (x) { return !x.private; });
-
-             // Sort by push date
-             repos.sort(function (a, b) {
-                var compA = b.pushed_at;
-                var compB = a.pushed_at;
-                return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-             });
 
              // Split into featured and other
              other_repos = repos.filter(function (x) { return myRepos.indexOf(x.name) < 0 && !x.private; });
