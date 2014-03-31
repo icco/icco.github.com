@@ -38,7 +38,6 @@
        #repos #header { margin-left: 0; padding-bottom: 8px; }
        #repos li, #links li { margin-left: 15px; list-style-type: none; }
        #repos ul, #links ul { margin: 0; }
-       #other_repos h3 { cursor: pointer; }
     </style>
 
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
@@ -73,7 +72,6 @@
           $('body').append(new_script);
         }
         var repos = response.data;
-        console.log(repos);
 
         // The repos I want to feature
         var myRepos = [
@@ -106,10 +104,6 @@
         $.each(other_repos, function () {
           a = '<a href="' + this.html_url + '">' + this.name + '</a> ';
           $('#other_repos > ul').append('<li>' + a + '</li>');
-        });
-
-        $('#other_repos > h3').bind('click', function (ev) {
-          $('#other_repos > ul').fadeToggle();
         });
       }
     </script>
